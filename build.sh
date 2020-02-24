@@ -38,9 +38,10 @@ source ./config.sh
 BUILDDIR="$PWD"
 
 # Copy missing ethernet.h header to NDK
-cp /usr/include/net/ethernet.h $NDK/platforms/$TARGET/$ARCH/usr/include/net/
+rsync -a /usr/include/net/ethernet.h $NDK/platforms/$TARGET/$ARCH/usr/include/net/
 
 # Start build
 $NDK/ndk-build NDK_PROJECT_PATH=$BUILDDIR/ \
     APP_BUILD_SCRIPT=/$BUILDDIR/Android.mk \
-    SYSROOT=$NDK/platforms/$TARGET/$ARCH/
+    SYSROOT=$NDK/platforms/$TARGET/$ARCH/  \
+    APP_ALLOW_MISSING_DEPS=true

@@ -11,9 +11,8 @@
 *.la
 *.a
 
-# Ignore obj and libs dirs
-obj/
-libs/
+# Ignore obj directory
+obj/*
 
 # Ignore compile files
 ifrename
@@ -23,3 +22,6 @@ iwgetid
 iwlist
 iwpriv
 iwspy
+
+# Include libs directory
+!libs/**

@@ -5,6 +5,44 @@ Allows to build [wireless-tools](http://www.hpl.hp.com/personal/Jean_Tourrilhes/
 
 Based off [wireless-tools-29](http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/wireless_tools.29.tar.gz).
 
+This is a personal fork for personal use.
+
+Building
+========
+1. Review and change, if needed, *config.sh*. Currently, it targets Android Oreo (SDK version 27) and ARM architecture.
+2. Review and change, if needed, *Android.mk*. Currently, it only build iwconfig, iwlist, and iwpriv binaries.
+3. Simply run *build.sh*. If it doesn't work, run the following commands manually:
+```bash
+NDK="/data/android_build/other/android-ndk-r21"
+SDK="/usr/lib/android-sdk"
+TARGET="android-27"
+ARCH="arch-arm"
+ABI="armeabi"
+BUILDDIR="$PWD"
+rsync -a /usr/include/net/ethernet.h $NDK/platforms/$TARGET/$ARCH/usr/include/net/
+$NDK/ndk-build NDK_PROJECT_PATH=$BUILDDIR/ APP_BUILD_SCRIPT=/$BUILDDIR/Android.mk SYSROOT=$NDK/platforms/$TARGET/$ARCH/ APP_ALLOW_MISSING_DEPS=true
+```
+4. Result will be put into the *libs* directory. Enjoy!
+
+Deploying
+=========
+Simply attach and push the required binaries to the device, preferrably in */system/xbin/*. The command is:
+```bash
+adb push iwconfig /system/xbin/
+```
+If this doesn't work out, you can try this way:
+```bash
+adb root
+adb disable-verity
+adb reboot
+adb wait-for-device root
+adb remount
+adb push iwconfig /system/xbin/
+```
+
+
+***Anything under this line is copied from the original GitHub repo.***
+
 Prerequisities
 ==============
 Development machine:
