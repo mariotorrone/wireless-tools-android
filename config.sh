@@ -19,11 +19,11 @@
 ###############################################################################
 
 # Path to Android NDK
-NDK="/opt/necessitas/android-ndk-r6b"
+NDK="/data/android_build/other/android-ndk-r21"
 # Path to Android SDK
-SDK="/opt/necessitas/android-sdk"
+SDK="/usr/lib/android-sdk"
 # Target Android Platform
-TARGET="android-9"
+TARGET="android-27"
 # Target Architecture
 ARCH="arch-arm"
 # Application Binary Interface
